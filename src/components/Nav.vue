@@ -22,13 +22,14 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '~@/assets/style/uniform-color.scss';
   nav {
     display:flex;
-    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    box-shadow: 0 0 3px $shadow;
 
     > .item{
       font-size: 12px;
-      color:#999999;
+      color:$color-1;
       padding: 2px 0;
       width: 33.33333%;
       display: flex;
@@ -42,9 +43,9 @@
     }
 
     > .item.selected{
-        color:#4A4A4A;
+        color:$color-2;
       >.icon{
-        fill:#F3543F;
+        fill:$color-3;
         stroke-width:3px;
       }
     }

@@ -7,8 +7,8 @@ module.exports = {
       .rule('svg-sprite')
       .test(/\.svg$/)
       .include.add(dir).end()
-      .use('svg-sprite-loader').loader('svg-sprite-loader').options({extract:false}).end()
-    config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite:true}])
+      .use('svg-sprite-loader-mod').loader('svg-sprite-loader-mod').options({extract:false}).end()
+    config.plugin('svg-sprite').use(require('svg-sprite-loader-mod/plugin'), [{plainSprite:true}])
     config.module.rule('svg').exclude.add(dir)
   }
 };
