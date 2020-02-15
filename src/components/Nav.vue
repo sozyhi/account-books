@@ -24,12 +24,11 @@
 <style lang="scss" scoped>
   @import '~@/assets/style/uniform-color.scss';
   nav {
+    @extend %outerShadow;
     display:flex;
-    box-shadow: 0 0 3px $shadow;
-
     > .item{
       font-size: 12px;
-      color:$color-1;
+      color:$color-ordinary;
       padding: 2px 0;
       width: 33.33333%;
       display: flex;
@@ -43,9 +42,9 @@
     }
 
     > .item.selected{
-        color:$color-2;
+        color:$color-selected-word;
       >.icon{
-        fill:$color-3;
+        fill:$color-selected-icon;
         stroke-width:3px;
       }
     }
