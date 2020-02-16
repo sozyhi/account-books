@@ -1,27 +1,27 @@
 <template>
-  <div>
     <Layout classPrefix="money">
-      <Types :xxx="2222"/>
-      <Tags :tags-source.sync="tags"/>
-      <Notes/>
-      <NumberPad/>
+      <Types :value.sync="record.type" />
+      <Tags :value.sync="record.tag" :tags-source.sync="tags" />
+      <Notes :value.sync="record.notes" />
+      <NumberPad :value.sync="record.amount" />
     </Layout>
-  </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
+  import Vue from 'vue';
   import Types from '@/components/Types.vue';
   import Tags from '@/components/Tags.vue';
   import Notes from '@/components/Notes.vue';
   import NumberPad from '@/components/NumberPad.vue';
+  import {Component} from 'vue-property-decorator';
 
-  export default {
-    name: 'Money',
-    components: {NumberPad, Notes, Tags, Types},
-    data() {
-      return {tags: ['餐饮', '服饰', '居家', '交通','娱乐','医疗']}
-    }
-  };
+  @Component({
+    components: {NumberPad, Notes, Tags, Types}
+  })
+  export default class Money extends Vue {
+    tags = ['餐饮', '服饰', '居家', '交通', '娱乐', '医疗'];
+    record = {tag: '', notes: '', type: '-', amount: 0};
+  }
 </script>
 
 <style lang="scss">
