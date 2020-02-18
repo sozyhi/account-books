@@ -62,7 +62,7 @@
       }
     }
 
-    remove(id: string) {
+    remove() {
       if (this.tag) {
         const message = tagListModel.remove(this.tag.id);
         if (message === 'success') {
