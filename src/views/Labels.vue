@@ -6,12 +6,13 @@
     </ul>
     <div class="tagsManage">
       <div class="tagList">
-        <router-link :to="`/labels/edit/${tag.id}`" class="tag" v-for="tag in tags" :key="tag.id"><span>{{tag.name}}</span>
+        <router-link :to="`/labels/edit/${tag.id}`" class="tag" v-for="tag in tags" :key="tag.id">
+          <span>{{tag.name}}</span>
           <Icon name="right"/>
         </router-link>
       </div>
       <div class="addTags-wrapper">
-        <button class="addTags" @click="addTags">新增标签</button>
+        <Button @click.native="addTags">新增标签</Button>
       </div>
     </div>
   </Layout>
@@ -21,22 +22,29 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import {tagListModel} from '@/models/tagListModel';
+  import Button from '@/components/Button.vue';
+
   tagListModel.fetch();
-  @Component
+  @Component({
+    components: {Button}
+  })
   export default class Labels extends Vue {
     tags = tagListModel.data;
-    addTags(){
-      const  name =window.prompt('请输入标签名');
-      if (name){
+
+    addTags() {
+      const name = window.prompt('请输入标签名');
+      if (name) {
         const message = tagListModel.create(name);
-        if(message === 'duplicated'){
+        if (message === 'duplicated') {
           window.alert('请勿重复添加');
-        }else if(message === 'success'){
+        } else if (message === 'success') {
           window.alert('添加成功');
         }
       }
     }
-    value= '-';
+
+    value = '-';
+
     selectType(type: string) {
       if (type !== '-' && type !== '+') {
         throw new Error('type is unknown');
@@ -81,7 +89,7 @@
     padding: 0 16px 0 16px;
     font-size: 14px;
 
-    >.tag {
+    > .tag {
       min-height: 44px;
       display: flex;
       align-items: center;
@@ -91,13 +99,6 @@
   }
 
   .addTags {
-
-    background: #767676;
-    color: white;
-    border-radius: 4px;
-    height: 40px;
-    padding: 0 16px;
-
     &-wrapper {
       text-align: center;
       margin-top: 44px;
