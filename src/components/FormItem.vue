@@ -2,7 +2,8 @@
   <div>
     <label class="formItem">
       <span class="name">{{fieldName}}</span>
-      <input type="text" v-model="notes" @change="notesChange" :placeholder="placeholder">
+      <input type="text" :value="value" @input="notesChange($event.target.value)" :placeholder="placeholder"
+             :disabled="disabled">
     </label>
   </div>
 </template>
@@ -16,11 +17,11 @@
     @Prop(String) readonly value!: string;
     @Prop({required: true}) fieldName!: string;
     @Prop() placeholder?: string;
+    @Prop() disabled?: string;
 
-    notes = this.value;
 
-    notesChange() {
-      this.$emit('update:value', this.notes);
+    notesChange(value: string) {
+      this.$emit('update:value', value);
     }
 
   }

@@ -16,3 +16,6 @@ button,input{
   outline: none;
 }
 
+input:disabled {
+  color: inherit;
+}

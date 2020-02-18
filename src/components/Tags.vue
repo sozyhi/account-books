@@ -1,8 +1,8 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in tagsSource" :key="tag" @click="toggle(tag)"
-          :class="{selected: selectedTag === tag}">{{tag}}
+      <li v-for="tag in tagsSource" :key="tag.id" @click="toggle(tag.name)"
+          :class="{selected: selectedTag === tag.name}">{{tag.name}}
       </li>
     </ul>
     <div class="new">

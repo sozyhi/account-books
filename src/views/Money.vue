@@ -1,8 +1,9 @@
 <template>
   <Layout classPrefix="money">
+    {{recordList}}
     <Types :value.sync="record.type"/>
     <Tags :value.sync="record.tag" :tags-source.sync="tags"/>
-    <FormItem field-name="备注" placeholder="请在这里输入备注" :value.sync="record.notes"/>
+    <FormItem field-name="备注" placeholder="请在这里输入备注" @update:value="onUpdateNotes"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
   </Layout>
 </template>
@@ -26,9 +27,8 @@
   export default class Money extends Vue {
 
     tags = tagList;
-    record: RecordItem = {tag: '', notes: '', type: '-', amount: 0};
+    record: RecordItem = {type: '-', tag: '', notes: '', amount: 0};
     recordList: RecordItem[] = recordList;
-
     saveRecord() {
       const newRecord: RecordItem = recordListModel.clone(this.record);
       newRecord.createdTime = new Date();
@@ -41,6 +41,9 @@
       recordListModel.save(this.recordList);
     }
 
+    onUpdateNotes(value: string) {
+      this.record.notes = value;
+    }
   }
 </script>
 
