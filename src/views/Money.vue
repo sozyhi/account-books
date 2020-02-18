@@ -1,6 +1,5 @@
 <template>
   <Layout classPrefix="money">
-    {{recordList}}
     <Types :value.sync="record.type"/>
     <Tags :value.sync="record.tag" :tags-source.sync="tags"/>
     <FormItem field-name="备注" placeholder="请在这里输入备注" @update:value="onUpdateNotes"/>

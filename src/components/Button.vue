@@ -1,9 +1,7 @@
 <template>
-  <div>
     <button class="button">
       <slot></slot>
     </button>
-  </div>
 </template>
 
 <script lang="ts">
@@ -17,7 +15,6 @@
 
 <style lang="scss" scoped>
   .button {
-    background: #767676;
     color: white;
     border-radius: 4px;
     height: 40px;

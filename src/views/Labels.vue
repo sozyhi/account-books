@@ -12,7 +12,7 @@
         </router-link>
       </div>
       <div class="addTags-wrapper">
-        <Button @click.native="addTags">新增标签</Button>
+        <Button class="addTags" @click.native="addTags">新增标签</Button>
       </div>
     </div>
   </Layout>
@@ -99,6 +99,7 @@
   }
 
   .addTags {
+    background: $color-selected-icon;
     &-wrapper {
       text-align: center;
       margin-top: 44px;
