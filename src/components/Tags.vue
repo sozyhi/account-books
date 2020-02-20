@@ -1,26 +1,35 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in tagsSource" :key="tag.id" @click="toggle(tag.name)"
+      <li v-for="tag in tagList" :key="tag.id" @click="toggle(tag.name)"
           :class="{selected: selectedTag === tag.name}">{{tag.name}}
       </li>
     </ul>
     <div class="new">
-      <button @click="create">新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
-  import store from '@/store/index2';
+  import {mixins} from 'vue-class-component';
+  import TagHelper from '@/mixins/TagHelper';
 
   @Component
-  export default class Tags extends Vue {
-    @Prop(Array) readonly tagsSource: string[] | undefined;
+  export default class Tags extends mixins(TagHelper) {
     @Prop(String) readonly value!: string;
+
+    get tagList() {
+      return this.$store.state.tagList;
+    }
+
     selectedTag = this.value;
+
+    created() {
+      this.$store.commit('fetchTags');
+    }
+
     toggle(tag: string) {
       if (this.selectedTag === '') {
         this.selectedTag = tag;
@@ -32,12 +41,6 @@
         }
       }
       this.$emit('update:value', this.selectedTag);
-    }
-    create() {
-      const name = window.prompt('请输入标签名');
-      if (name) {
-        store.createTag(name);
-      }
     }
   }
 </script>
