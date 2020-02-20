@@ -6,7 +6,7 @@
       </li>
     </ul>
     <div class="new">
-      <button @click="create()">新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
   </div>
 </template>
@@ -32,17 +32,10 @@
       }
       this.$emit('update:value', this.selectedTag);
     }
-
     create() {
       const name = window.prompt('请输入标签名');
-      if (name === '') {
-        window.alert('标签名不能为空');
-      } else if (this.tagsSource) {
-        if (this.tagsSource.indexOf(name) < 0) {
-          this.$emit('update:tagsSource', [...this.tagsSource, name]);
-        } else {
-          window.alert('请勿重复添加');
-        }
+      if (name) {
+        window.createTag(name);
       }
     }
   }
