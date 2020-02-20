@@ -18,7 +18,7 @@
   import {tagListModel} from '@/models/tagListModel';
 
   const recordList = recordListModel.fetch();
-  const tagList =tagListModel.fetch();
+  const tagList = tagListModel.fetch();
 
   @Component({
     components: {NumberPad, FormItem, Tags, Types}
@@ -28,16 +28,14 @@
     tags = tagList;
     record: RecordItem = {type: '-', tag: '', notes: '', amount: 0};
     recordList: RecordItem[] = recordList;
+
     saveRecord() {
-      const newRecord: RecordItem = recordListModel.clone(this.record);
-      newRecord.createdTime = new Date();
-      this.recordList.push(newRecord);
-      console.log(this.recordList);
+      recordListModel.create(this.record);
     }
 
     @Watch('recordList')
     onRecordListChange() {
-      recordListModel.save(this.recordList);
+      recordListModel.save();
     }
 
     onUpdateNotes(value: string) {
