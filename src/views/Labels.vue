@@ -1,9 +1,6 @@
 <template>
   <Layout>
-    <ul class="type">
-      <li :class="value === '-' && 'selected'" @click="selectType('-')">支出</li>
-      <li :class="value === '+' && 'selected'" @click="selectType('+')">收入</li>
-    </ul>
+    <Tabs :data-source="calculateType" :value.sync="type"/>
     <div class="tagsManage">
       <div class="tagList">
         <router-link :to="`/labels/edit/${tag.id}`" class="tag" v-for="tag in tagList" :key="tag.id">
@@ -23,28 +20,27 @@
   import Button from '@/components/Button.vue';
   import {mixins} from 'vue-class-component';
   import TagHelper from '@/mixins/TagHelper';
+  import Tabs from '@/components/Money/Tabs.vue';
 
 
   @Component({
-    components: {Button},
+    components: {Tabs, Button},
   })
   export default class Labels extends mixins(TagHelper) {
     get tagList() {
       return this.$store.state.tagList;
     }
 
+    type = '-';
+    calculateType = [
+      {text: '支出', value: '-'},
+      {text: '收入', value: '+'},
+    ];
+
     beforeCreate() {
       this.$store.commit('fetchTags');
     }
 
-    value = '-';
-
-    selectType(type: string) {
-      if (type !== '-' && type !== '+') {
-        throw new Error('type is unknown');
-      }
-      this.value = type;
-    }
   }
 </script>
 <style lang="scss" scoped>
